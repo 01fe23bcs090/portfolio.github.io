@@ -127,6 +127,180 @@
             <p>For optimizing the table availability check, the system uses simple lookup operations, ensuring quick reservation and release processes.</p>
         </div>
     </div>
+
+ </head>
+<body>
+
+    <h1>C++ Code</h1>
+
+    <div class="code-container">
+        <pre>
+#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;map&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+// Customer queue management
+class CustomerQueue {
+    queue&lt;string&gt; customers;
+public:
+    void addCustomer(const string&amp; name) {
+        customers.push(name);
+    }
+
+    void removeCustomer() {
+        if (!customers.empty()) {
+            cout &lt;&lt; "Customer " &lt;&lt; customers.front() &lt;&lt; " has left.\\n";
+            customers.pop();
+        } else {
+            cout &lt;&lt; "No customers in the queue.\\n";
+        }
+    }
+
+    void displayQueue() {
+        if (customers.empty()) {
+            cout &lt;&lt; "No customers in the queue.\\n";
+            return;
+        }
+        queue&lt;string&gt; temp = customers;
+        cout &lt;&lt; "Customers in the queue:\\n";
+        while (!temp.empty()) {
+            cout &lt;&lt; temp.front() &lt;&lt; "\\n";
+            temp.pop();
+        }
+    }
+};
+
+// Reservation system with number of seats
+class Reservations {
+    map&lt;int, pair&lt;string, int&gt;&gt; reservations;  // table number -&gt; (customer name, number of seats)
+    int totalTables;
+public:
+    Reservations(int tables) : totalTables(tables) {}
+
+    bool reserveTable(int table, const string&amp; name, int seats) {
+        if (table &gt; totalTables || table &lt; 1) {
+            cout &lt;&lt; "Invalid table number.\\n";
+            return false;
+        }
+        if (reservations.count(table)) {
+            cout &lt;&lt; "Table already reserved.\\n";
+            return false;
+        }
+        reservations[table] = make_pair(name, seats);
+        cout &lt;&lt; "Table " &lt;&lt; table &lt;&lt; " reserved for " &lt;&lt; name &lt;&lt; " with " &lt;&lt; seats &lt;&lt; " seats.\\n";
+        return true;
+    }
+
+    void releaseTable(int table) {
+        if (reservations.erase(table)) {
+            cout &lt;&lt; "Table " &lt;&lt; table &lt;&lt; " is now available.\\n";
+        } else {
+            cout &lt;&lt; "Table " &lt;&lt; table &lt;&lt; " is not reserved.\\n";
+        }
+    }
+
+    void displayReservations() {
+        if (reservations.empty()) {
+            cout &lt;&lt; "No reservations.\\n";
+            return;
+        }
+        cout &lt;&lt; "Current reservations:\\n";
+        for (auto &it : reservations) {
+            cout &lt;&lt; "Table " &lt;&lt; it.first &lt;&lt; ": " &lt;&lt; it.second.first &lt;&lt; " (Seats: " &lt;&lt; it.second.second &lt;&lt; ")\\n";
+        }
+    }
+};
+
+// Main function
+int main() {
+    CustomerQueue queue;
+    Reservations reservations(10);  // 10 tables in the reservation system
+
+    int choice;
+    do {
+        cout &lt;&lt; "\\nRestaurant Management System\\n";
+        cout &lt;&lt; "1. Manage Customer Queue\\n";
+        cout &lt;&lt; "2. Manage Reservations\\n";
+        cout &lt;&lt; "3. Exit\\n";
+        cout &lt;&lt; "Enter your choice: ";
+        cin &gt;&gt; choice;
+
+        switch (choice) {
+            case 1: {
+                int queueChoice;
+                do {
+                    cout &lt;&lt; "\\nCustomer Queue Management\\n";
+                    cout &lt;&lt; "1. Add Customer\\n";
+                    cout &lt;&lt; "2. Remove Customer\\n";
+                    cout &lt;&lt; "3. Display Queue\\n";
+                    cout &lt;&lt; "4. Back\\n";
+                    cout &lt;&lt; "Enter your choice: ";
+                    cin &gt;&gt; queueChoice;
+
+                    if (queueChoice == 1) {
+                        string name;
+                        cout &lt;&lt; "Enter customer name: ";
+                        cin &gt;&gt; name;
+                        queue.addCustomer(name);
+                    } else if (queueChoice == 2) {
+                        queue.removeCustomer();
+                    } else if (queueChoice == 3) {
+                        queue.displayQueue();
+                    }
+                } while (queueChoice != 4);
+                break;
+            }
+            case 2: {
+                int reservationChoice;
+                do {
+                    cout &lt;&lt; "\\nReservation Management\\n";
+                    cout &lt;&lt; "1. Reserve Table\\n";
+                    cout &lt;&lt; "2. Release Table\\n";
+                    cout &lt;&lt; "3. Display Reservations\\n";
+                    cout &lt;&lt; "4. Back\\n";
+                    cout &lt;&lt; "Enter your choice: ";
+                    cin &gt;&gt; reservationChoice;
+
+                    if (reservationChoice == 1) {
+                        int table;
+                        string name;
+                        int seats;
+                        cout &lt;&lt; "Enter table number: ";
+                        cin &gt;&gt; table;
+                        cout &lt;&lt; "Enter customer name: ";
+                        cin &gt;&gt; name;
+                        cout &lt;&lt; "Enter number of seats: ";
+                        cin &gt;&gt; seats;
+                        reservations.reserveTable(table, name, seats);
+                    } else if (reservationChoice == 2) {
+                        int table;
+                        cout &lt;&lt; "Enter table number to release: ";
+                        cin &gt;&gt; table;
+                        reservations.releaseTable(table);
+                    } else if (reservationChoice == 3) {
+                        reservations.displayReservations();
+                    }
+                } while (reservationChoice != 4);
+                break;
+            }
+            case 3:
+                cout &lt;&lt; "Exiting...\\n";
+                break;
+            default:
+                cout &lt;&lt; "Invalid choice. Please try again.\\n";
+        }
+    } while (choice != 3);
+
+    return 0;
+}
+        </pre>
+    </div>
+
+</body>
+</html>
     
 </body>
 </html>
