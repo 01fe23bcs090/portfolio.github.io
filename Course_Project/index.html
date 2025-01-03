@@ -110,5 +110,41 @@
         </div>
     </div>
 
+ <div class="description">
+        <h2>Customer Queue Management</h2>
+        <div class="content">
+            <p>The Customer Queue Management system ensures that customers are served in the order they arrive. It uses a queue data structure where customers are added to the queue as they arrive and removed in the same order (FIFO - First In, First Out) when they are served. This helps ensure a fair and efficient process for handling customers.</p>
+            <p>The primary algorithm used here is the **FIFO (First In, First Out)** algorithm, which ensures that customers are served in the order they joined the queue. This approach is simple but effective, ensuring that no customer is skipped or kept waiting unnecessarily.</p>
+        </div>
+    </div>
+
+    <!-- Table Reservation System and Algorithms -->
+    <div class="description">
+        <h2>Table Reservation System</h2>
+        <div class="content">
+            <p>The Table Reservation System allows customers to book tables in advance, ensuring that tables are available when needed. The system tracks which tables are reserved and which are available, allowing the staff to manage bookings efficiently and avoid double bookings.</p>
+            <p>The algorithm used here primarily involves a **Lookup and Reservation Management** approach. The system maintains a list of tables, each marked as either reserved or available. When a table is reserved, the algorithm checks if the table is already taken, and if not, reserves the table. If a table is released, it updates the status, making it available for future reservations.</p>
+            <p>For optimizing the table availability check, the system uses simple lookup operations, ensuring quick reservation and release processes.</p>
+        </div>
+    </div>
+
+    <div class="algorithms">
+        <h2>Usage of Algorithms</h2>
+        <div class="content">
+            <p>The system leverages several key algorithms to optimize various operations:</p>
+            <ul>
+                <li><strong>Queue Management Algorithm:</strong> A simple queue algorithm ensures customers are served in the order they arrive. Customers are added and removed using First-In-First-Out (FIFO) principle.</li>
+                <li><strong>Shortest Path Algorithm:</strong> Dijkstra's algorithm is used in the delivery system to find the shortest route between two points, improving delivery time and efficiency.</li>
+                <li><strong>Reservation Management Algorithm:</strong> A lookup mechanism allows for efficient reservation and release of tables by keeping track of the tables and their current status.</li>
+                <li><strong>Inventory Update Algorithm:</strong> Inventory updates are managed with simple addition and subtraction operations based on stock quantities to ensure availability tracking is up-to-date.</li>
+                <li><strong>Billing and Revenue Calculation:</strong> A basic accumulation algorithm adds up the cost of items ordered by customers and splits the total bill among the specified number of people.</li>
+            </ul>
+            <p>These algorithms work together to streamline the workflow and enhance the restaurant's overall operational efficiency.</p>
+        </div>
+    </div>
+
+</body>
+</html>
+    
 </body>
 </html>
